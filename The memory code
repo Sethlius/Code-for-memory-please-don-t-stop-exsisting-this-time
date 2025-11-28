@@ -19,10 +19,30 @@ Console.WriteLine("Welcome to Memory!\n" +
 //Variables 
 bool mainMenu = true;
 bool multiPlayer = false;
+bool isRunning = false;
+
+char space = ' ';
 
 int moveInMenu = 0;
 
 string[] options = { "Singleplayer", "Multiplayer" };
+
+
+Console.WriteLine(space);
+for (int i = 0; i < options.Length; i++)
+{
+    if (i == 0)
+    {
+        Console.ForegroundColor = ConsoleColor.Yellow;
+    }
+    else
+    {
+        Console.ForegroundColor = ConsoleColor.White;
+    }
+
+        Console.Write($"{options[i]}\t");
+}
+
 
 while (mainMenu)
 {
@@ -46,6 +66,21 @@ while (mainMenu)
         moveInMenu = 0;
     }
 
+    if (consoleKey == ConsoleKey.Enter && moveInMenu == 0)
+    {
+        multiPlayer = false;
+        mainMenu = !mainMenu;
+        isRunning = true;
+        break;
+    }
+    else if (consoleKey == ConsoleKey.Enter && moveInMenu == 1)
+    {
+        multiPlayer = true;
+        mainMenu = !mainMenu;
+        isRunning = true;
+        break;
+    }
+
     switch (moveInMenu)
     {
         case 0:
@@ -63,17 +98,26 @@ while (mainMenu)
             Console.Write(options[1]);
             break;
     }
+}
 
-    if (consoleKey == ConsoleKey.Enter && moveInMenu == 0)
+DateTime now = DateTime.Now;
+
+
+while (isRunning)
+{
+    if (multiPlayer)
     {
-        multiPlayer = false;
-        mainMenu = !mainMenu;
-        break;
+        isRunning = false;
     }
-    else if (consoleKey == ConsoleKey.Enter && moveInMenu == 1)
+    else if (!multiPlayer)
     {
-        multiPlayer = true;
-        mainMenu = !mainMenu;
-        break;
+        isRunning = false;
     }
+}
+
+TimeSpan elapsed = DateTime.Now - now;
+
+if (!multiPlayer)
+{
+    Console.WriteLine(elapsed.TotalSeconds);
 }
