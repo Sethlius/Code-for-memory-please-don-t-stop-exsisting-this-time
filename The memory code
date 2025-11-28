@@ -9,7 +9,7 @@
 // Loop ends when all values are gone
 //The player with the most points wins the game, stopping timer for one player so they can try and beat their own time.
 
-hi
+
 
 Console.WriteLine("Welcome to Memory!\n" +
     "Memory is a game where you pick 2 cards, and if they are the same, you get a point!\n" +
